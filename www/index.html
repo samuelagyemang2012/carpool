@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./css/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/waves.min.css"/>
+    <link rel="stylesheet" href="./css/animate.css"/>
+    <link rel="stylesheet" href="./css/nativedroid2.css"/>
+
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery-ui.js"></script>
+    <script src="./js/jquery-mobile.js"></script>
+    <script src="./js/waves.min.js"></script>
+    <script src="./js/wow.min.js"></script>
+    <script src="./js/nativedroid2.js"></script>
+    <script src="./js/nd2settings.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/myscript.js"></script>
+</head>
+
+<body>
+
+<!--Login page-->
+<div data-role="page" id="loginpage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home"></i>
+        </a>
+    </div>
+
+    <div data-role="popup" id="loginfailpopup" class="ui-content">
+        <h4 style="color: crimson">Wrong username or password.</h4>
+    </div>
+
+    <div data-role="content">
+        <div class="align-center">
+            <h2 style="color: #4CAF50">Car Pool</h2>
+            <!--<hr>-->
+        </div>
+
+        <div class="align-center">
+            <h4>Login here !</h4>
+        </div>
+
+        <div>
+            <input type="text" id="username" placeholder="Username" style="color: #4CAF50; text-align: center" required>
+        </div>
+
+        <div>
+            <input type="password" id="password" placeholder="Password" style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+        <br>
+
+        <div>
+            <a data-role="button" id="loginbutton" style="background-color: #4CAF50;color: #fff"
+               onclick="login()">Login</a>
+        </div>
+
+        <div class="align-center">
+            <h5>Sign up <a href="#signuppage" data-transition="slide" style="color: #4CAF50">here !</a></h5>
+        </div>
+    </div>
+</div>
+
+<!--Sign up page-->
+<div data-role="page" id="signuppage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home"></i>
+        </a>
+    </div>
+
+    <div data-role="popup" id="successpopup" class="ui-content">
+        <h4 style="color: #4CAF50">Sign-up successful !</h4>
+    </div>
+
+    <div data-role="popup" id="failpopup" class="ui-content">
+        <h4 style="color: crimson">Looks like this user already exists !</h4>
+    </div>
+
+    <div data-role="content">
+        <div class="align-center">
+            <h4>Sign up here !</h4>
+            <br>
+        </div>
+
+        <div>
+            <input type="text" id="s_username" placeholder="Username" style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div>
+            <input type="password" id="s_password" placeholder="Password" style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div>
+            <input type="tel" id="s_phone" placeholder="Phone number" style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div class="align-center">
+            <h5 style="color: #4CAF50">Mode of Payment</h5>
+        </div>
+
+        <div>
+            <select data-native-menu="false" id="payment">
+                <option value="0">Cash</option>
+                <option value="1">Credit-Card</option>
+            </select>
+        </div>
+        <br>
+
+        <div>
+            <a style="background-color: #4CAF50;color: #fff" data-role="button" id="signupbutton" onclick="sign_up()">Sign
+                Up</a>
+        </div>
+    </div>
+</div>
+
+<!--add page-->
+<div data-role="page" id="addpoolpage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home"></i>
+        </a>
+        <!--data-tab-active="true"-->
+        <ul data-role="tab" data-swipe="true" class="nd2Tabs">
+            <li data-tab="add" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px"
+                   href="#addpoolpage">Add</a>
+            </li>
+            <li data-tab="mypools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_my_pools()">My
+                    Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_all_pools()">Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="">Joined</a>
+            </li>
+            <li data-tab="news" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#">News</a>
+            </li>
+        </ul>
+    </div>
+
+    <!--popups-->
+    <div data-role="popup" id="pooladdedpopup" class="ui-content">
+        <h4 style="color: #4CAF50">Pool created</h4>
+    </div>
+
+    <div data-role="popup" id="poolnotadded" class="ui-content">
+        <h4 style="color: crimson">Pool could not be created</h4>
+    </div>
+    <!---->
+
+    <div data-role="content">
+        <div>
+            <input type="text" id="poolname" placeholder="Enter pool name" style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div>
+            <input type="number" id="poolsize" placeholder="Enter number of seats"
+                   style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div>
+            <input type="date" id="pooldate" placeholder="Enter date"
+                   style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+            <div class="align-center">
+                <h5 style="color: #4CAF50">Departure time</h5>
+            </div>
+            <input type="time" id="pooltime" placeholder="Enter time"
+                   style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+            <input type="number" id="poolcost" placeholder="Enter unit cost" style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+            <!--<div class="align-center">-->
+            <!--<h5 style="color: #4CAF50"></h5>-->
+            <!--</div>-->
+
+            <input type="text" id="from" placeholder="Departure address" style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+            <!--<div class="align-center">-->
+            <!--<h5 style="color: #4CAF50"></h5>-->
+            <!--</div>-->
+
+            <input type="text" id="to" placeholder="Destination" style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+            <a style="background-color: #4CAF50;color: #fff" data-role="button" id="createpool" onclick="add_pool()">Create
+                Pool</a>
+        </div>
+
+    </div>
+</div>
+
+<!--my pool page-->
+<div data-role="page" id="mypoolpage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home"></i>
+        </a>
+
+        <ul data-role="tab" data-swipe="true" class="nd2Tabs">
+            <li data-tab="add" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px"
+                   href="#addpoolpage">Add</a>
+            </li>
+            <li data-tab="mypools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_my_pools()">My
+                    Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_all_pools()">Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_joined_pools()">Joined</a>
+            </li>
+            <li data-tab="news" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#">News</a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="content">
+        <div id="mypools">
+
+        </div>
+    </div>
+</div>
+<!--//-->
+
+<!--all pool page-->
+<div data-role="page" id="allpoolspage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home"></i>
+        </a>
+
+        <ul data-role="tab" data-swipe="true" class="nd2Tabs">
+            <li data-tab="add" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px"
+                   href="#addpoolpage">Add</a>
+            </li>
+            <li data-tab="mypools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_my_pools()">My
+                    Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_all_pools()">Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_joined_pools()">Joined</a>
+            </li>
+            <li data-tab="news" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#">News</a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="content">
+        <div id="allpools">
+
+        </div>
+    </div>
+</div>
+
+<!--pool page-->
+
+<div data-role="page" id="poolpage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home"></i>
+        </a>
+
+        <ul data-role="tab" data-swipe="true" class="nd2Tabs">
+            <li data-tab="add" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px"
+                   href="#addpoolpage">Add</a>
+            </li>
+            <li data-tab="mypools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_my_pools()">My
+                    Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_all_pools()">Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_joined_pools()">Joined</a>
+            </li>
+            <li data-tab="news" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#">News</a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="popup" id="joinsuccesspopup" class="ui-content">
+        <h4 style="color: #4CAF50">You successfully joined this pool.</h4>
+    </div>
+
+    <div data-role="popup" id="joinfullpopup" class="ui-content">
+        <h4 style="color: crimson">Sorry, this pool is full !</h4>
+    </div>
+
+    <div data-role="popup" id="joinalreadypopup" class="ui-content">
+        <h4 style="color: #000">You have already joined this pool.</h4>
+    </div>
+
+    <div data-role="popup" id="readytodelete" class="ui-content">
+        <h4>Are you sure you want to leave this pool ?</h4>
+
+        <div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a href='#' style='background-color: gainsboro' onclick="close_pop()"
+                       class='ui-btn waves-effect waves-button waves-effect waves-button'>
+                        <i style='font-size: 20px' class='zmdi zmdi-close'></i>
+                    </a>
+                </div>
+
+                <div class="col-xs-6">
+                    <a href='#' style='background-color: gainsboro'
+                       class='ui-btn waves-effect waves-button waves-effect waves-button' onclick='leave_pool()'>
+                        <i style='font-size: 20px' class='zmdi zmdi-check'></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="popup" id="leavedonepopup" class="ui-content">
+        <h4 style="color: #4CAF50">Done.</h4>
+    </div>
+
+
+    <div data-role="content">
+        <div id="apool">
+
+        </div>
+    </div>
+</div>
+
+<!--joined page-->
+<div data-role="page" id="joinpoolpage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home"></i>
+        </a>
+
+        <ul data-role="tab" data-swipe="true" class="nd2Tabs">
+            <li data-tab="add" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px"
+                   href="#addpoolpage">Add</a>
+            </li>
+            <li data-tab="mypools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_my_pools()">My
+                    Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_all_pools()">Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_joined_pools()">Joined</a>
+            </li>
+            <li data-tab="news" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#">News</a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="content">
+        <div id="joinedpools">
+
+        </div>
+    </div>
+</div>
+
+<!--edit pool page-->
+<div data-role="page" id="editpage">
+    <div data-role="header" style="background-color: #4CAF50">
+        <h1></h1>
+        <a href="index.html" class="ui-btn ui-btn-icon-right" data-transition="flip">
+            <i class="zmdi zmdi-home"></i>
+        </a>
+        <!--data-tab-active="true"-->
+        <ul data-role="tab" data-swipe="true" class="nd2Tabs">
+            <li data-tab="add" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px"
+                   href="#addpoolpage">Add</a>
+            </li>
+            <li data-tab="mypools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_my_pools()">My
+                    Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="get_all_pools()">Pools</a>
+            </li>
+            <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
+                   onclick="">Joined</a>
+            </li>
+            <li data-tab="news" class="nav-item waves-effect waves-button waves-light">
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#">News</a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="popup" id="editsuccess" class="ui-content">
+        <h4 style="color: #4CAF50">This pool has been updated.</h4>
+    </div>
+
+    <div data-role="content">
+        <div>
+            <input type="text" id="upoolname" placeholder="Enter pool name" style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div>
+            <input type="number" id="upoolsize" placeholder="Enter number of seats"
+                   style="color: #4CAF50; text-align: center"
+                   required>
+        </div>
+
+        <div>
+            <input type="date" id="upooldate" placeholder="Enter date"
+                   style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+            <div class="align-center">
+                <h5 style="color: #4CAF50">Departure time</h5>
+            </div>
+            <input type="time" id="upooltime" placeholder="Enter time"
+                   style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+            <input type="number" id="upoolcost" placeholder="Enter unit cost"
+                   style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+
+            <input type="text" id="ufrom" placeholder="Departure address" style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+
+            <input type="text" id="uto" placeholder="Destination" style="color: #4CAF50; text-align: center">
+        </div>
+
+        <div>
+            <a style="background-color: #4CAF50;color: #fff" data-role="button" id="updatepool" onclick="update_pool()">Update
+                Pool</a>
+        </div>
+
+    </div>
+
+
+</div>
+
+<script type="text/javascript" src="cordova.js"></script>
+</body>
+
+</html>
