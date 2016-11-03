@@ -54,7 +54,10 @@ function login() {
     }
     else {
         global_id = obj.id;
-        //alert(global_id);
+
+        //test code
+        $.cookie('user_id', global_id);
+        //
         get_my_pools();
         //alert(global_id);
     }
@@ -459,6 +462,7 @@ function leave_pool() {
             }, 900);
     }
 }
+
 
 
 

@@ -20,12 +20,13 @@
     <script src="./js/jquery.js"></script>
     <script src="./js/jquery-ui.js"></script>
     <script src="./js/jquery-mobile.js"></script>
+    <script src="./js/jquery.cookie.js"></script>
     <script src="./js/waves.min.js"></script>
     <script src="./js/wow.min.js"></script>
     <script src="./js/nativedroid2.js"></script>
     <script src="./js/nd2settings.js"></script>
-    <script type="text/javascript" src="./js/index.js"></script>
     <script type="text/javascript" src="./js/myscript.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
 </head>
 
 <body>
@@ -155,10 +156,10 @@
             </li>
             <li data-tab="pools" class="nav-item waves-effect waves-button waves-light">
                 <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#"
-                   onclick="">Joined</a>
+                   onclick="get_joined_pools()">Joined</a>
             </li>
             <li data-tab="news" class="nav-item waves-effect waves-button waves-light">
-                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#">News</a>
+                <a data-transition="slide" data-role="button" class="ui-btn" style="font-size: 14px" href="#" id="news">News</a>
             </li>
         </ul>
     </div>
